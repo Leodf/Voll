@@ -6,7 +6,11 @@ import Title from '../../components/Title';
 import Button from '../../components/Button';
 import InputText from '../../components/InputText';
 
-const Login: React.FC = () => {
+type NavigationProps = {
+  navigation: any;
+};
+
+const Login: React.FC<NavigationProps> = ({navigation}: NavigationProps) => {
   return (
     <VStack flex={1} justifyContent="center" alignItems="center" p={5}>
       <Image source={Logo} alt="Logo Voll" />
@@ -21,13 +25,13 @@ const Login: React.FC = () => {
           />
         </FormControl>
       </Box>
-      <Button>Entrar</Button>
+      <Button onPress={() => navigation.navigate('Home')}>Entrar</Button>
       <Link href="#" mt={2}>
         Esqueceu sua senha?
       </Link>
       <Box w="100%" flexDirection="row" justifyContent="center" mt={8}>
         <Text>Ainda não tem cadastro? </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
           <Text color="blue.500">Faça seu cadastro!</Text>
         </TouchableOpacity>
       </Box>
