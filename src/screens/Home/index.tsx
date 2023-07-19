@@ -7,13 +7,6 @@ import Explorar from './screens/Explorar';
 import Perfil from './screens/Perfil';
 
 const Tab = createBottomTabNavigator();
-const screenOptions = {
-  tabBarStyle: {
-    backgroundColor: '#002851',
-  },
-  tabBarActiveTintColor: '#339cff',
-  tabBarInactiveTintColor: '#FFF',
-};
 const tabs = [
   {
     name: 'Inicio',
@@ -39,7 +32,17 @@ const tabs = [
 
 const Home: React.FC = () => {
   return (
-    <Tab.Navigator screenOptions={screenOptions}>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: '#002851',
+          // height: '9%',
+          paddingBottom: 5,
+          paddingTop: 5,
+        },
+        tabBarActiveTintColor: '#339cff',
+        tabBarInactiveTintColor: '#FFF',
+      }}>
       {tabs.map(tab => (
         <Tab.Screen
           key={tab.name}

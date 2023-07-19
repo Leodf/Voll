@@ -1,56 +1,56 @@
-import {ScrollView, Image, Box, Text, Divider, VStack} from 'native-base';
+import {ScrollView, Image, Text, Divider, VStack, Box} from 'native-base';
 import React from 'react';
 import Logo from '../../../assets/Logo.png';
 import Title from '../../../components/Title';
 import InputText from '../../../components/InputText';
 import Button from '../../../components/Button';
+import testimonials from '../../../mocks/Testimonials';
 
 const Inicio: React.FC = () => {
   return (
-    <ScrollView flex={1} p={5}>
-      <VStack flex={1} mb={10}>
-        <Image source={Logo} alt="Logo Voll" />
-        <Title ml={1} alignSelf="flex-start" color="blue.500">
-          Boas-vindas!
-        </Title>
+    <ScrollView flex={1} bgColor="white">
+      <VStack
+        flex={1}
+        alignItems="flex-start"
+        justifyContent="flex-start"
+        p={5}>
+        <Image source={Logo} alt="Logo" mt={10} />
+        <Title color="blue.500">Boas-vindas!</Title>
+
         <Box
-          m={1}
-          p={1}
-          shadow={2}
-          borderColor="gray.200"
-          borderWidth="1"
-          rounded="lg">
-          <Box maxW="90%" alignSelf="center">
-            <InputText placeholder="Digite a especialidade" />
-            <InputText placeholder="Digite sua localização" />
-            <Button mt={3} mb={3} autoSize={true}>
-              Buscar
-            </Button>
-          </Box>
+          w="100%"
+          borderRadius="lg"
+          p={3}
+          mt={10}
+          shadow="1"
+          borderRightRadius="md">
+          <InputText placeholder="Digite a especialidade" />
+          <InputText placeholder="Digite sua localização" />
+          <Button mt={3} mb={3}>
+            Buscar
+          </Button>
         </Box>
-        <Title color="blue.800" mb={3}>
+
+        <Title color="blue.800" alignSelf="center">
           Depoimentos
         </Title>
-        <Box m={1}>
-          <Text fontSize="md" color="#6B6E71">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius
-            officia esse reprehenderit dolor ex delectus nostrum non, cum
-            asperiores, culpa ad fuga nobis rerum beatae quaerat minima expedita
-            consequuntur assumenda.
-          </Text>
-          <Title fontSize="lg">Leonardo, 31 anos, São Paulo/SP</Title>
-          <Divider mt={5} mb={5} />
-        </Box>
-        <Box m={1}>
-          <Text fontSize="md" color="#6B6E71">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius
-            officia esse reprehenderit dolor ex delectus nostrum non, cum
-            asperiores, culpa ad fuga nobis rerum beatae quaerat minima expedita
-            consequuntur assumenda.
-          </Text>
-          <Title fontSize="lg">Leonardo, 31 anos, São Paulo/SP</Title>
-          <Divider mt={5} />
-        </Box>
+        <VStack space={3} divider={<Divider />} w="100%">
+          {testimonials.map(testimonial => (
+            <Box key={testimonial.id} w="100%" borderRadius="lg" p={3}>
+              <Text color="gray.300" fontSize="md" textAlign="justify">
+                {testimonial.text}
+              </Text>
+              <Text
+                color="gray.500"
+                fontSize="lg"
+                fontWeight="bold"
+                alignSelf="center"
+                mt="2">
+                {testimonial.titulo}
+              </Text>
+            </Box>
+          ))}
+        </VStack>
       </VStack>
     </ScrollView>
   );
