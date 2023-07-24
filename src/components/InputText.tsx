@@ -6,12 +6,16 @@ interface InputTextProps {
   placeholder: string;
   secureTextEntry?: boolean;
   leftIcon?: React.ReactNode;
+  value?: string;
+  onChangeText?: (text: string) => void;
 }
 
 const InputText: React.FC<InputTextProps> = ({
   label,
   placeholder,
   secureTextEntry = false,
+  value,
+  onChangeText,
 }: InputTextProps) => {
   return (
     <FormControl mt={3}>
@@ -24,6 +28,8 @@ const InputText: React.FC<InputTextProps> = ({
         bgColor="gray.100"
         secureTextEntry={secureTextEntry}
         shadow={3}
+        value={value}
+        onChangeText={onChangeText}
       />
     </FormControl>
   );
