@@ -1,22 +1,70 @@
-import {Image, Box, Checkbox, ScrollView, Text} from 'native-base';
-import Logo from '../../assets/Logo.png';
+import {Box, Checkbox, Image, ScrollView, Text, useToast} from 'native-base';
 import React, {useState} from 'react';
-import Title from '../../components/Title';
+import Logo from '../../assets/Logo.png';
 import Button from '../../components/Button';
 import InputText from '../../components/InputText';
+import Title from '../../components/Title';
 import section from '../../mocks/SignupText';
+import {makeSignUp} from '../../services/signup-service';
 
-const SignUp: React.FC = () => {
+type NavigationProps = {
+  navigation: any;
+};
+
+const SignUp: React.FC<NavigationProps> = ({navigation}: NavigationProps) => {
   const [numSection, setNumSection] = useState(0);
+  const [data, setData] = useState({} as any);
+  const [plans, setPlans] = useState([] as Array<number>);
+  const toast = useToast();
 
   function nextSection() {
     if (numSection < section.length - 1) {
       setNumSection(numSection + 1);
+    } else {
+      signup();
     }
   }
   function previousSection() {
     if (numSection > 0) {
       setNumSection(numSection - 1);
+    }
+  }
+
+  function updateData(id: string, value: string) {
+    setData({...data, [id]: value});
+  }
+
+  async function signup() {
+    const result = await makeSignUp({
+      cpf: data.cpf,
+      nome: data.nome,
+      email: data.email,
+      endereco: {
+        cep: data.cep,
+        rua: data.rua,
+        numero: data.numero,
+        estado: data.estado,
+        complemento: data.complemento,
+      },
+      senha: data.senha,
+      telefone: data.telefone,
+      possuiPlanoSaude: plans.length > 0,
+      planosSaude: plans,
+      imagem: data.imagem,
+    });
+    if (result) {
+      toast.show({
+        title: 'Cadastro realizado com sucesso',
+        description: 'Você já pode fazer login',
+        backgroundColor: 'green.500',
+      });
+      navigation.replace('Login');
+    } else {
+      toast.show({
+        title: 'Erro ao cadastrar',
+        description: 'Verifique os dados e tente novamente',
+        backgroundColor: 'red.500',
+      });
     }
   }
 
@@ -31,6 +79,9 @@ const SignUp: React.FC = () => {
               label={item.label}
               placeholder={item.placeholder}
               key={item.id}
+              secureTextEntry={item.secureTextEntry}
+              value={data[item.name]}
+              onChangeText={text => updateData(item.name, text)}
             />
           );
         })}
@@ -42,7 +93,18 @@ const SignUp: React.FC = () => {
           </Text>
           {section[numSection].checkbox.map(checkbox => {
             return (
-              <Checkbox value={checkbox.value} key={checkbox.id}>
+              <Checkbox
+                value={checkbox.value}
+                key={checkbox.id}
+                onChange={() => {
+                  setPlans(previousPlans => {
+                    if (previousPlans.includes(checkbox.id)) {
+                      return previousPlans.filter(id => id !== checkbox.id);
+                    }
+                    return [...previousPlans, checkbox.id];
+                  });
+                }}
+                isChecked={plans.includes(checkbox.id)}>
                 {checkbox.value}
               </Checkbox>
             );

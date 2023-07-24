@@ -9,10 +9,8 @@ export async function makeLogin(email: string, password: string) {
       email,
       senha: password,
     });
-    console.log(result.data);
     return result.data;
   } catch (error) {
-    console.log(error);
     return null;
   }
 }
