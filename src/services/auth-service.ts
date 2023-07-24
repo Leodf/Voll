@@ -1,6 +1,7 @@
 import api from './api';
 
 export async function makeLogin(email: string, password: string) {
+  console.log(email, password);
   if (!email || !password) {
     return null;
   }
@@ -11,6 +12,7 @@ export async function makeLogin(email: string, password: string) {
     });
     return result.data;
   } catch (error) {
+    console.log(error);
     return null;
   }
 }
