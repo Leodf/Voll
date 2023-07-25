@@ -13,7 +13,6 @@ export async function getEspecialistaPorEstado(
     });
     return resultado.data;
   } catch (error) {
-    console.log(error);
     return null;
   }
 }

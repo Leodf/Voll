@@ -4,8 +4,8 @@ import Logo from '../../assets/Logo.png';
 import Button from '../../components/Button';
 import InputText from '../../components/InputText';
 import Title from '../../components/Title';
-import section from '../../mocks/SignupText';
 import {makeSignUp} from '../../services/signup-service';
+import section from '../../utils/SignupText';
 
 type NavigationProps = {
   navigation: any;

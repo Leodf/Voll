@@ -9,6 +9,7 @@ type CardProps = {
   date?: string;
   isDone?: boolean;
   isMarked?: boolean;
+  onPress?: () => void;
 };
 
 const CardConsulta: React.FC<CardProps> = ({
@@ -18,6 +19,7 @@ const CardConsulta: React.FC<CardProps> = ({
   date,
   isDone,
   isMarked,
+  onPress,
 }: CardProps) => {
   return (
     <VStack
@@ -37,7 +39,9 @@ const CardConsulta: React.FC<CardProps> = ({
           <Text>{date}</Text>
         </VStack>
       </VStack>
-      <Button mt={4}>{isMarked ? 'Cancelar' : 'Agendar consulta'}</Button>
+      <Button mt={4} onPress={onPress}>
+        {isMarked ? 'Cancelar' : 'Agendar consulta'}
+      </Button>
     </VStack>
   );
 };

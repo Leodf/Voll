@@ -1,9 +1,9 @@
-import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Inicio from './screens/Inicio';
 import Consultas from './screens/Consultas';
 import Explorar from './screens/Explorar';
+import Inicio from './screens/Inicio';
 import Perfil from './screens/Perfil';
 
 const Tab = createBottomTabNavigator();
@@ -47,9 +47,10 @@ const Home: React.FC = () => {
         <Tab.Screen
           key={tab.name}
           name={tab.name}
-          component={tab.component}
+          component={tab.component as any}
           options={{
             headerShown: false,
+            // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({color, size}) => (
               <Ionicons name={tab.icon} size={size} color={color} />
             ),

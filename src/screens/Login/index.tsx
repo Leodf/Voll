@@ -47,7 +47,6 @@ const Login: React.FC<NavigationProps> = ({navigation}: NavigationProps) => {
       const decodeToken = jwtDecode<any>(token);
       const pacientId = decodeToken.id;
       AsyncStorage.setItem('pacientId', pacientId);
-      console.log(result);
       navigation.replace('Home');
     } else {
       toast.show({

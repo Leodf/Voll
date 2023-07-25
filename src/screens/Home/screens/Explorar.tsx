@@ -1,5 +1,6 @@
 import {Box, ScrollView, VStack} from 'native-base';
 import React, {useState} from 'react';
+import {NavigationProps} from '../../../@types/navigation';
 import Button from '../../../components/Button';
 import CardConsulta from '../../../components/CardConsulta';
 import InputText from '../../../components/InputText';
@@ -10,9 +11,12 @@ type IEspecialista = {
   nome: string;
   imagem: string;
   especialidade: string;
+  id: string;
 };
 
-const Explorar: React.FC = () => {
+const Explorar: React.FC<NavigationProps<'Explorar'>> = ({
+  navigation,
+}: NavigationProps<'Explorar'>) => {
   const [estado, setEstado] = useState('');
   const [especialidade, setEspecialidade] = useState('');
   const [resultadoBusca, setResultadoBusca] = useState([]);
@@ -23,7 +27,6 @@ const Explorar: React.FC = () => {
     }
     const result = await getEspecialistaPorEstado(estado, especialidade);
     if (result) {
-      // console.log(result);
       setResultadoBusca(result);
     }
   }
@@ -68,6 +71,11 @@ const Explorar: React.FC = () => {
               speciality={especialista.especialidade}
               imageUrl={especialista.imagem}
               name={especialista.nome}
+              onPress={() =>
+                navigation.navigate('Agendamento', {
+                  especialistaId: especialista.id,
+                })
+              }
             />
           </VStack>
         ))}

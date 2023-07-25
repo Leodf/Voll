@@ -1,12 +1,13 @@
-import {ScrollView, Image, Text, Divider, VStack, Box} from 'native-base';
+import {Box, Divider, Image, ScrollView, Text, VStack} from 'native-base';
 import React from 'react';
+import {NavigationProps} from '../../../@types/navigation';
 import Logo from '../../../assets/Logo.png';
-import Title from '../../../components/Title';
-import InputText from '../../../components/InputText';
 import Button from '../../../components/Button';
-import testimonials from '../../../mocks/Testimonials';
+import InputText from '../../../components/InputText';
+import Title from '../../../components/Title';
+import testimonials from '../../../utils/Testimonials';
 
-const Inicio: React.FC = () => {
+const Inicio: React.FC<NavigationProps<'Inicio'>> = () => {
   return (
     <ScrollView flex={1} bgColor="white">
       <VStack

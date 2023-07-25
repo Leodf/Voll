@@ -1,16 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Avatar, Divider, ScrollView, Text, VStack} from 'native-base';
 import React, {useEffect, useState} from 'react';
+import {NavigationProps} from '../../../@types/navigation';
 import Button from '../../../components/Button';
 import Title from '../../../components/Title';
-import {getPerfilData} from '../../../services/perfil-service';
+import {getPerfilData} from '../../../services/paciente-service';
 import {Paciente} from '../../../services/signup-service';
 
-type NavigationProps = {
-  navigation: any;
-};
-
-const Perfil: React.FC<NavigationProps> = ({navigation}: NavigationProps) => {
+const Perfil: React.FC<NavigationProps<'Perfil'>> = ({
+  navigation,
+}: NavigationProps<'Perfil'>) => {
   const [dataPaciente, setDataPaciente] = useState({} as Paciente);
 
   useEffect(() => {
